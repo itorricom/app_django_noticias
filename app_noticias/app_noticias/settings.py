@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from site import USER_BASE
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -77,8 +79,18 @@ WSGI_APPLICATION = 'app_noticias.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': '',
+        'NAME': 'django_api',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            }
+        #Desde MySQL 5.7 en adelante y en instalaciones nuevas de MySQL 5.6, el valor predeterminado de la opción sql_mode contiene STRICT_TRANS_TABLES. Esa opción convierte las advertencias en errores cuando los datos se truncan al insertarlos, por lo que Django recomienda encarecidamente activar un modo estricto para MySQL para evitar la pérdida de datos (ya sea STRICT_TRANS_TABLES o STRICT_ALL_TABLES).
     }
 }
 

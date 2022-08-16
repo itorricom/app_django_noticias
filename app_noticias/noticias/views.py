@@ -5,3 +5,7 @@ from django.http import HttpResponse
 
 def index(request):
     return HttpResponse('Hello, world!')
+
+
+def detail(request, id):
+    return HttpResponse(f"Estas viendo la noticia {id}")
